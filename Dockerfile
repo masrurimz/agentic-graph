@@ -8,7 +8,7 @@ ENV UV_COMPILE_BYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 COPY pyproject.toml uv.lock ./
-COPY agentic_graph/ ./agentic_graph/
+COPY packages/agentic-graph/ ./packages/agentic-graph/
 
 RUN uv sync --frozen --no-dev
 
@@ -16,14 +16,19 @@ FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
-ENV COGNEE_DATA_ROOT=/data \
-    COGNEE_SYSTEM_ROOT=/system \
-    PATH="/app/.venv/bin:$PATH" \
+ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    DATA_ROOT_DIRECTORY=/data \
+    SYSTEM_ROOT_DIRECTORY=/system \
+    ENOLA_AUTO_INSTALL=true
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates git \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /app/.venv /app/.venv
-COPY --from=builder /app/agentic_graph /app/agentic_graph
+COPY --from=builder /app/packages /app/packages
 COPY --from=builder /app/pyproject.toml /app/pyproject.toml
 COPY --from=builder /app/uv.lock /app/uv.lock
 

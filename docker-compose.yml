@@ -37,9 +37,19 @@ services:
       COGNEE_PORT: 28195
       DATA_ROOT_DIRECTORY: /data
       SYSTEM_ROOT_DIRECTORY: /system
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      ENOLA_PATH: ""
+      ENOLA_AUTO_INSTALL: "true"
     volumes:
       - agentic-data:/data
       - agentic-system:/system
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:28195/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
     restart: unless-stopped
 
 volumes:

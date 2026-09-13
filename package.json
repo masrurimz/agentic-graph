@@ -1,0 +1,10 @@
+{
+	"name": "@agentic-graph/root",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"workspaces": ["packages/*"],
+	"dependencies": {
+		"effect": "4.0.0-rc.115"
+	}
+}

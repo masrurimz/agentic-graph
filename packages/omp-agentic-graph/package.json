@@ -1,0 +1,22 @@
+{
+	"name": "@agentic-graph/omp",
+	"version": "0.1.0",
+	"description": "OMP plugin for agentic-graph (Cognee code + memory graph)",
+	"type": "module",
+	"scripts": {
+		"typecheck": "tsc --noEmit",
+		"test": "bun test/schema-check.ts",
+		"smoke": "bun test/client-smoke.ts"
+	},
+	"omp": {
+		"tools": "./src/tools.ts",
+		"extensions": "./src/index.ts"
+	},
+	"dependencies": {
+		"effect": "4.0.0-rc.115"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"typescript": "^5.5.0"
+	}
+}

@@ -9,3 +9,13 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .git/
+node_modules/
+bun.lock
+.enola/
+*.jsonl
+insights.json
+receipt.json
+snapshot.meta.json
+llm_context.md
+extractor_cache.json
+packages/omp-agentic-graph/

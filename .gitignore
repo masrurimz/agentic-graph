@@ -16,5 +16,20 @@ dist
 .mypy_cache
 .ruff_cache
 
+# Generated graph artifacts
+*.jsonl
+insights.json
+receipt.json
+snapshot.meta.json
+llm_context.md
+extractor_cache.json
+
 # OS
 .DS_Store
+
+# Node / Bun
+node_modules/
+bun.lock
+
+# OMP local config
+.omp/

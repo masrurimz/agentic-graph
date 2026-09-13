@@ -10,10 +10,15 @@ resolution-markers = [
     "(python_full_version < '3.13' and 'Darwin Kernel Version 22.' in platform_version and sys_platform == 'darwin') or (python_full_version < '3.13' and 'Darwin Kernel Version 23.' in platform_version and sys_platform == 'darwin')",
 ]
 
+[manifest]
+members = [
+    "agentic-graph",
+]
+
 [[package]]
 name = "agentic-graph"
 version = "0.1.0"
-source = { editable = "." }
+source = { editable = "packages/agentic-graph" }
 dependencies = [
     { name = "cognee", extra = ["postgres-binary"] },
     { name = "fastapi" },

@@ -160,7 +160,7 @@ uv run ag-link
 After `ag-migrate` finishes, run the switchover runbook to link entities and verify parity:
 
 ```bash
-./scripts/switchover.sh
+uv run ag-switchover
 ```
 
 
