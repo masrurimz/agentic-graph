@@ -1,0 +1,20 @@
+# Environment
+.env
+.venv
+
+# Data / caches
+.cognee_data
+.cognee_system
+.enola
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+build
+dist
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# OS
+.DS_Store

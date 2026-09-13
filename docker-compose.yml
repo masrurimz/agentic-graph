@@ -1,0 +1,48 @@
+services:
+  postgres:
+    build: ./docker/postgres
+    container_name: cognee-postgres
+    command:
+      - postgres
+      - -c
+      - shared_preload_libraries=pg_cron,graph
+      - -c
+      - cron.database_name=cognee_db
+    environment:
+      POSTGRES_USER: cognee
+      POSTGRES_PASSWORD: cognee
+      POSTGRES_DB: cognee_db
+    ports:
+      - "28196:5432"
+    volumes:
+      - cognee-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cognee -d cognee_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  agentic-graph:
+    build: .
+    container_name: agentic-graph
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "28195:28195"
+    env_file:
+      - .env
+    environment:
+      COGNEE_HOST: 0.0.0.0
+      COGNEE_PORT: 28195
+      DATA_ROOT_DIRECTORY: /data
+      SYSTEM_ROOT_DIRECTORY: /system
+    volumes:
+      - agentic-data:/data
+      - agentic-system:/system
+    restart: unless-stopped
+
+volumes:
+  cognee-postgres-data:
+  agentic-data:
+  agentic-system:
